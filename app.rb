@@ -5,7 +5,7 @@ require "active_record"
 require_relative "./models/user.rb"
 
 get "/" do 
-    "Sinatra Series Homework"
+    "Sinatra Series Homework- Jasmyne Jean-Remy"
 end
 
 get "/api/users/:name" do 
@@ -47,4 +47,13 @@ delete "/api/users/:name" do
 end
 
 put "/api/users/:id" do
+    user = User.find(params['id'])
+    request.body.rewind
+    data = JSON.parse request.body.read
+    if user
+        user.update(data)
+        #update
+    else
+        [404,"user not found"]
+    end
 end
